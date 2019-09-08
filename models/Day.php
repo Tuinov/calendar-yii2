@@ -4,7 +4,12 @@
 namespace app\models;
 
 
-class Day
+use yii\base\Model;
+
+class Day extends Model
 {
+    public $title;
+    public $weekDay;
+    public $standartActivity;
 
 }
