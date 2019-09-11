@@ -123,6 +123,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        Yii::info('test message');
         return $this->render('about');
     }
 

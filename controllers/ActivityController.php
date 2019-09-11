@@ -5,6 +5,8 @@ namespace app\controllers;
 
 
 use app\models\Activity;
+use app\models\UserMessage;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
 
@@ -27,6 +29,20 @@ class ActivityController extends Controller
 
     public function actionCreate()
     {
-        // создание
+        $model = new Activity();
+        return $this->render('form', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionSubmit()
+    {
+        var_dump(Yii::$app->request->post());
+    }
+
+
+    public function actionEdit()
+    {
+        // редактирование
     }
 }
