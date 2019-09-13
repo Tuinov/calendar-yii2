@@ -117,14 +117,12 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
-     *
-     * @return string
+     * Displays list page.
      */
-    public function actionAbout()
+    public function actionList()
     {
-        Yii::info('test message');
-        return $this->render('about');
+//        Yii::info('test message');
+        return $this->render('list');
     }
 
     /**

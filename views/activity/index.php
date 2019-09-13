@@ -4,15 +4,15 @@
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = 'События';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-about">
+<div class="activity-list">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This is the About page. You may modify the following file to customize its content:
+        Список событий
     </p>
 
-    <code><?= __FILE__ ?></code>
+    <a href="/activity/create">Создать</a>
 </div>

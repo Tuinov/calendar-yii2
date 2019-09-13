@@ -11,17 +11,22 @@ use yii\bootstrap\Html;
  */
 ?>
 
+<div class="activity-form">
+
     <h1>Новое событие</h1>
 
-<?php $form = ActiveForm::begin([
-    'action' => '/activity/submit'
-]) ?>
+    <?php $form = ActiveForm::begin(['action' => '/activity/submit']) ?>
+    <?= $form->field($model, 'title')->textInput()?>
+    <?= $form->field($model, 'dayStart')->textInput(['type' => 'date'])?>
+    <?= $form->field($model, 'dayEnd')->textInput(['type' => 'date'])?>
+    <?= $form->field($model, 'userID')->textInput()?>
+    <?= $form->field($model, 'description')->textarea()?>
+    <?= $form->field($model, 'repeat')->checkbox()?>
+    <?= $form->field($model, 'blockDay')->checkbox()?>
+    <?= $form->field($model, 'attachments[]')->fileInput(['multiple' => true])?>
 
-    <h3>Заполните форму</h3>
+    <?= Html::submitButton('Создать', ['class' => 'btn btn-success']) ?>
 
-<?= $form->field($model, 'title')->textInput()?>
-<?= $form->field($model, 'discription')->textarea()?>
+    <?php ActiveForm::end() ?>
 
-<?= Html::submitButton('Отправить сообщение', ['class' => 'btn btn-success']) ?>
-
-<?php ActiveForm::end() ?>
+</div>

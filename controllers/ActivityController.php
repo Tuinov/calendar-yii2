@@ -9,12 +9,13 @@ use app\models\UserMessage;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
+use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
     public function actionIndex()
     {
-        return 'actionIndex';
+        return $this->render('index');
     }
 
     public function actionView()
@@ -37,7 +38,15 @@ class ActivityController extends Controller
 
     public function actionSubmit()
     {
-        var_dump(Yii::$app->request->post());
+        $model = new Activity();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->attachments = UploadedFile::getInstance($model, 'attachments');
+
+
+        }
+        return 'событие создано';
+
     }
 
 
