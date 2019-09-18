@@ -3,33 +3,26 @@
 
 namespace app\models;
 
+use yii\db\ActiveRecord;
 
-use yii\base\Model;
-
-class Activity extends Model
+class Activity extends ActiveRecord
 {
-    public $title;
-    public $dayStart;
-    public $dayEnd;
-    public $userID;
-    public $description;
+    public static function tableName()
+    {
+        return 'activities';
+    }
 
-    // прикрепленные файлы
-    public $attachments;
-
-    public $repeat = false;
-    public $blockDay = false;
 
     public function attributeLabels()
     {
         return [
             'title' => 'Событие',
-            'dayStart' => 'Дата начала',
-            'dayEnd' => 'Дата окончания',
-            'userID' => 'Пользователь',
+            'date_start' => 'Дата начала',
+            'date_end' => 'Дата окончания',
+            'user_id' => 'Пользователь',
             'description' => 'Описание',
             'repeat' => 'Повторение',
-            'blockDay' => 'Блокирующее',
+            'blocked' => 'Блокирующее',
             'attachments' => 'Загрузить файлы',
         ];
     }
@@ -40,12 +33,12 @@ class Activity extends Model
     public function rules()
     {
         return [
-            [['title', 'description', 'dayStart', 'dayEnd', 'userID'], 'required'],
+            [['title', 'description', 'date_start', 'date_end', 'user_id'], 'required'],
             [['title'], 'string', 'min' => 3, 'max' => 30],
-            [['dayStart', 'dayEnd'], 'date', 'format' => 'php:Y-m-d'],
-            [['userID'], 'integer'],
-            [['repeat', 'blockDay'], 'boolean'],
-            [['attachments'], 'file', 'maxFiles' => 5]
+            [['date_start', 'date_end'], 'date', 'format' => 'php:Y-m-d'],
+            [['user_id'], 'integer'],
+            [['repeat', 'blocked'], 'boolean'],
+            //[['attachments'], 'file', 'maxFiles' => 5]
         ];
     }
 

@@ -61,7 +61,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+       $rows = Yii::$app->db->createCommand('SELECT * FROM activities')->queryAll();
+       return $this->render('index', [
+        'activities' => $rows]);
     }
 
     /**

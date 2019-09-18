@@ -17,13 +17,13 @@ use yii\bootstrap\Html;
 
     <?php $form = ActiveForm::begin(['action' => '/activity/submit']) ?>
     <?= $form->field($model, 'title')->textInput()?>
-    <?= $form->field($model, 'dayStart')->textInput(['type' => 'date'])?>
-    <?= $form->field($model, 'dayEnd')->textInput(['type' => 'date'])?>
-    <?= $form->field($model, 'userID')->textInput()?>
+    <?= $form->field($model, 'date_start')->textInput(['type' => 'date'])?>
+    <?= $form->field($model, 'date_end')->textInput(['type' => 'date'])?>
+    <?= $form->field($model, 'user_id')->textInput()?>
     <?= $form->field($model, 'description')->textarea()?>
     <?= $form->field($model, 'repeat')->checkbox()?>
-    <?= $form->field($model, 'blockDay')->checkbox()?>
-    <?= $form->field($model, 'attachments[]')->fileInput(['multiple' => true])?>
+    <?= $form->field($model, 'blocked')->checkbox()?>
+<!--    --><?//= $form->field($model, 'attachments[]')->fileInput(['multiple' => true])?>
 
     <?= Html::submitButton('Создать', ['class' => 'btn btn-success']) ?>
 
