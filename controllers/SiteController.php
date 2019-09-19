@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Registration;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -133,8 +135,10 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionTestPage()
+    public function actionRegistration()
     {
-        return $this->render('test');
+        $model = new Registration();
+        return $this->render('registration', [
+            'model' => $model]);
     }
 }

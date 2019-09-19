@@ -8,6 +8,7 @@ use app\models\Activity;
 use app\models\UserMessage;
 use yii\db\Query;
 use yii\db\QueryBuilder;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -16,8 +17,31 @@ use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
+//    public function behaviors()
+//    {
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index', 'view', 'create'],
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['login', 'signup'],
+//                        'roles' => ['@'], // isGuest
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['logout'],
+//                        'roles' => ['@'],  // !isGuest
+//                    ],
+//                ],
+//            ],
+//        ];
+//    }
+
     public function actionIndex()
     {
+
         // методы без ActiveRecord
         // $query = new Query();
         // $rows = $query->select('*')->from('activities')->all();
@@ -74,6 +98,10 @@ class ActivityController extends Controller
 
     public function actionEdit()
     {
-        // редактирование
+        $item = Yii::$app->db->createCommand('SELECT * FROM activities where id=1')->queryOne();
+
+        return $this->render('form', [
+            'item' => $item
+        ]);
     }
 }

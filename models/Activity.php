@@ -5,6 +5,11 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * @package app\models
+* @property-read User $user
+*/
+
 class Activity extends ActiveRecord
 {
     public static function tableName()
@@ -33,13 +38,23 @@ class Activity extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'date_start', 'date_end', 'user_id'], 'required'],
+            [['title', 'description', 'date_start', 'user_id'], 'required'],
+
             [['title'], 'string', 'min' => 3, 'max' => 30],
-            [['date_start', 'date_end'], 'date', 'format' => 'php:Y-m-d'],
+            [['date_start'], 'date', 'format' => 'php:Y-m-d'],
+            [['date_end'], 'default', 'value' => 'date_start'],
+           // [['date_end'], 'date', 'min' => 'date_start'],
+
+
             [['user_id'], 'integer'],
             [['repeat', 'blocked'], 'boolean'],
             //[['attachments'], 'file', 'maxFiles' => 5]
         ];
+    }
+
+    public function getUser()  //$model->user
+    {
+       return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
 }
