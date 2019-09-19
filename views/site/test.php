@@ -1,18 +1,32 @@
 <?php
 
-/* @var $this yii\web\View */
+use app\models\Activity;
+use yii\bootstrap\ActiveForm;
+use yii\web\View;
+use yii\bootstrap\Html;
 
-use yii\helpers\Html;
-
-$this->title = 'Test Page';
-$this->params['breadcrumbs'][] = $this->title;
+/**
+ * @var View $this
+ * @var \app\models\Activity $model
+ */
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <ul>
-        <li>item 1</li>
-        <li>item 2</li>
-        <li>item 3</li>
-    </ul>
+<div class="activity-form">
+
+    <h1>Новое событие</h1>
+
+    <?php $form = ActiveForm::begin(['action' => '/activity/submit']) ?>
+    <?= $form->field($model, 'title')->textInput()?>
+    <?= $form->field($model, 'date_start')->textInput(['type' => 'date'])?>
+    <?= $form->field($model, 'date_end')->textInput(['type' => 'date'])?>
+    <?= $form->field($model, 'user_id')->textInput()?>
+    <?= $form->field($model, 'description')->textarea()?>
+    <?= $form->field($model, 'repeat')->checkbox()?>
+    <?= $form->field($model, 'blocked')->checkbox()?>
+    <!--    --><?//= $form->field($model, 'attachments[]')->fileInput(['multiple' => true])?>
+
+    <?= Html::submitButton('Создать', ['class' => 'btn btn-success']) ?>
+
+    <?php ActiveForm::end() ?>
+
 </div>

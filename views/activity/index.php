@@ -2,7 +2,7 @@
 
 /**
  * @var $this yii\web\View
-* @var \app\models\Activity[] $activities
+* @var app\models\Activity[] $activities
  */
 
 use yii\helpers\Html;
@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <?php foreach ($activities as $item) { ?>
             <li>
-                <?= var_dump($item->title); ?>
+
+                <?= var_dump($item); ?>
             </li>
         <?php } ?>
     </ul>
