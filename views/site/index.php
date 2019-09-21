@@ -9,7 +9,7 @@ $this->title = 'Главная';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Calendar!</h1>
+        <h1>Календарь!</h1>
 
         <p class="lead">Удобный таск-трекер для ваших задач.</p>
 

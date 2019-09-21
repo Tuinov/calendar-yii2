@@ -54,21 +54,20 @@ class ActivityController extends Controller
             'activities' => $rows]);
     }
 
-    public function actionView($id)
+    public function actionView()
 
     {
-        $activityItem = Yii::$app->db->createCommand('SELECT * FROM activities where id=:id', [
-            ':id' => $id
-        ])->queryOne();
+        $activityItem = Yii::$app->db->createCommand('SELECT * FROM activities where id=1')->queryOne();
 
         return $this->render('view', [
             'model' => $activityItem
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate(int $id = null)
     {
-        $model = new Activity();
+
+        $model = $id ? Activity::findOne($id) : new Activity();
         return $this->render('form', [
             'model' => $model
         ]);

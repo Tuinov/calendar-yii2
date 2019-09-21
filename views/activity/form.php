@@ -25,7 +25,11 @@ use yii\bootstrap\Html;
     <?= $form->field($model, 'blocked')->checkbox()?>
 <!--    --><?//= $form->field($model, 'attachments[]')->fileInput(['multiple' => true])?>
 
+
     <?= Html::submitButton('Создать', ['class' => 'btn btn-success']) ?>
+
+    <?= Html::submitButton('Редактировать', ['class' => 'btn btn-success']) ?>
+
 
     <?php ActiveForm::end() ?>
 

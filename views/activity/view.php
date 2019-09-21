@@ -15,4 +15,4 @@ use \yii\bootstrap\Html;
 <h2><?= $model['title'] ?></h2>
 
 
-<a href="/activity/edit">редактировать</a>
+<a href="/activity/create?id=<?= $model['id'] ?> ">редактировать</a>
