@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Registration;
+use app\models\SignUpForm;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -103,6 +103,22 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionSignUp()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new SignUpForm();
+        if ($model->load(Yii::$app->request->post()) && $model->registration()) {
+            return $this->goHome();
+        }
+
+
+        return $this->render('signUp', [
+            'model' => $model]);
+    }
+
     /**
      * Displays contact page.
      *
@@ -130,15 +146,5 @@ class SiteController extends Controller
         return $this->render('list');
     }
 
-    /**
-     * Displays test page.
-     *
-     * @return string
-     */
-    public function actionRegistration()
-    {
-        $model = new Registration();
-        return $this->render('registration', [
-            'model' => $model]);
-    }
+
 }
