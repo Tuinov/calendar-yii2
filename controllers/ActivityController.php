@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\models\Activity;
 use app\models\UserMessage;
+use yii\data\ActiveDataProvider;
 use yii\db\Query;
 use yii\db\QueryBuilder;
 use yii\filters\AccessControl;
@@ -17,27 +18,23 @@ use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
-//    public function behaviors()
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'only' => ['index', 'view', 'create'],
-//                'rules' => [
-//                    [
-//                        'allow' => true,
-//                        'actions' => ['login', 'signup'],
-//                        'roles' => ['@'], // isGuest
-//                    ],
-//                    [
-//                        'allow' => true,
-//                        'actions' => ['logout'],
-//                        'roles' => ['@'],  // !isGuest
-//                    ],
-//                ],
-//            ],
-//        ];
-//    }
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'create'],
+                        'roles' => ['@'], // !isGuest
+                    ],
+
+                ],
+            ],
+        ];
+    }
 
     public function actionIndex()
     {
@@ -49,22 +46,29 @@ class ActivityController extends Controller
 
         // метод ActiveRecord Создать новый объект запроса
         $query = Activity::find();
-        $rows = $query->all();
+        // $rows = $query->all();
+        $provider = new ActiveDataProvider([
+            'query' => $query
+        ]);
         return $this->render('index', [
-            'activities' => $rows]);
+            'provider' => $provider
+        ]);
     }
 
-    public function actionView()
+    public function actionView($id)
 
     {
-        $activityItem = Yii::$app->db->createCommand('SELECT * FROM activities where id=1')->queryOne();
+        $activityItem = Activity::findOne($id);
+//        $activityItem = Yii::$app->db->createCommand('SELECT * FROM activities where id=:id', [
+//            'id' => $id
+//     ])->queryOne();
 
         return $this->render('view', [
             'model' => $activityItem
         ]);
     }
 
-    public function actionCreate(int $id = null)
+    public function actionUpdate(int $id = null)
     {
 
         $model = $id ? Activity::findOne($id) : new Activity();
@@ -95,12 +99,13 @@ class ActivityController extends Controller
     }
 
 
-    public function actionEdit()
+    public function actionDelete($id)
     {
-        $item = Yii::$app->db->createCommand('SELECT * FROM activities where id=1')->queryOne();
 
-        return $this->render('form', [
-            'item' => $item
-        ]);
+        $model =  Activity::findOne($id)->delete();
+        if(Yii::$app->response->redirect(['/activity/index'])){
+          } else {
+            return "Failed: " . VarDumper::export($model->errors);
+            }
     }
 }

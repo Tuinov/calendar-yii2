@@ -9,20 +9,30 @@ use yii\console\Controller;
 
 class AppController extends Controller
 {
+    // создание начальных юзеров
     public function actionUsers()
     {
-        $admin = new User([
-            'username' => 'admin',
+        // создание начальных юзеров
+        $users = [
+            'admin',
+            'manager',
+            'user'
+        ];
+
+        foreach ($users as $login){
+            $user = new User([
+                'username' => $login,
 //            'password_hash' => '',
 //            'auth_key' => '',
-           'access_token' => 'test',
-            'created_at' => time(),
-            'updated_at' => time(),
-        ]);
+                'access_token' => "{$login}-token",
+                'created_at' => time(),
+                'updated_at' => time(),
+            ]);
 
-        $admin->generateAuthKey();
-        $admin->password = '123123123';
+            $user->generateAuthKey();
+            $user->password = '123123123';
 
-        $admin->save();
+            $user->save();
+        }
     }
 }

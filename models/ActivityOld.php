@@ -24,12 +24,12 @@ class ActivityOld extends Model
     {
         return [
             'title' => 'Событие',
-            'dayStart' => 'Дата начала',
-            'dayEnd' => 'Дата окончания',
-            'userID' => 'Пользователь',
+            'date_start' => 'Дата начала',
+            'date_end' => 'Дата окончания',
+            'user_id' => 'Пользователь',
             'description' => 'Описание',
             'repeat' => 'Повторение',
-            'blockDay' => 'Блокирующее',
+            'blocked' => 'Блокирующее',
             'attachments' => 'Загрузить файлы',
         ];
     }

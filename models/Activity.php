@@ -4,6 +4,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * @package app\models
@@ -17,6 +18,16 @@ class Activity extends ActiveRecord
         return 'activities';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => 'user_id',
+            ],
+        ];
+    }
 
     public function attributeLabels()
     {
@@ -38,7 +49,7 @@ class Activity extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'date_start', 'user_id'], 'required'],
+            [['title', 'description', 'date_start'], 'required'],
 
             [['title'], 'string', 'min' => 3, 'max' => 30],
             [['date_start'], 'date', 'format' => 'php:Y-m-d'],
@@ -46,7 +57,7 @@ class Activity extends ActiveRecord
            // [['date_end'], 'date', 'min' => 'date_start'],
 
 
-            [['user_id'], 'integer'],
+//            [['user_id'], 'integer'],
             [['repeat', 'blocked'], 'boolean'],
             //[['attachments'], 'file', 'maxFiles' => 5]
         ];
