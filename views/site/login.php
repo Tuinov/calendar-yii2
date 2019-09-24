@@ -7,12 +7,14 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Войти';
+$this->title = 'Вход';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
+
+    <?= Html::button('Нет аккаунта?', ['site/sign-up','class' => 'btn btn-success btn-lg']) ?>
+    <h1><?= Html::encode($this->title) ?></h1>
     <p>
         Пожалуйста, заполните следующие поля для входа:</p>
 

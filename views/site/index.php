@@ -13,7 +13,7 @@ $this->title = 'Главная';
 
         <p class="lead">Удобный таск-трекер для ваших задач.</p>
 
-        <p><a class="btn btn-lg btn-success" href="/activity/create">Создать новое событие</a></p>
+        <p><a class="btn btn-lg btn-success" href="/activity/update">Создать новое событие</a></p>
     </div>
 
 </div>

@@ -5,14 +5,47 @@
  * @var \app\models\Activity $model
  */
 use \yii\bootstrap\Html;
+use yii\widgets\DetailView;
 
+$this->title = 'Событие';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="activity-list">
 
-<a href="/site">на главную</a>
+    <?= Html::a('К списку', ['/activity'], ['class' => 'btn btn-info']) ?>
 
-<h1>Событие</h1>
+    <h1><?= \yii\helpers\Html::encode($this->title) ?></h1>
 
-<h2><?= $model['title'] ?></h2>
+<?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+//        [
+//          'label' => 'Свойство',
+//          'value' => 'значение'
+//        ],
+        [
+            'label' => 'Имя создателя',
+            'attribute' => 'user.username',
 
+        ],
 
-<a href="/activity/create?id=<?= $model['id'] ?> ">редактировать</a>
+        'title',
+        'date_start:date',
+        'date_end:date',
+//        'user_id',
+        'description',
+        'repeat:boolean',
+        'blocked:boolean',
+
+        [
+            'label' => 'вернуться на главную',
+            'value' => 'http://calendar',
+            'format' => 'url',
+
+        ],
+    ]
+]); ?>
+
+<?= Html::a('Редактировать', ['activity/update','id'=>$model['id']], ['class' => 'btn btn-success']) ?>
+
+</div>

@@ -38,8 +38,8 @@ class SignUpForm extends Model
 //            'password_hash' => '',
 //            'auth_key' => '',
                 'access_token' =>"{$this->username}-token",
-                'created_at' => time(),
-                'updated_at' => time(),
+//                'created_at' => time(),
+//                'updated_at' => time(),
             ]);
 
             $user->generateAuthKey();
