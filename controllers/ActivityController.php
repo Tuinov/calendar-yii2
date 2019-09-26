@@ -23,12 +23,12 @@ class ActivityController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'create'],
+                'only' => ['index', 'view', 'update'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create'],
-                        'roles' => ['@'], // !isGuest
+                        'actions' => ['index', 'view', 'update'],
+                        'roles' => ['@'],
                     ],
 
                 ],
@@ -46,7 +46,12 @@ class ActivityController extends Controller
 
         // метод ActiveRecord Создать новый объект запроса
         $query = Activity::find();
-        // $rows = $query->all();
+
+        // если юзер не админ, то просматривает только свои записи
+        if (!Yii::$app->user->can('admin')) {
+            $query->andWhere(['user_id' => Yii::$app->user->id]);
+        }
+
         $provider = new ActiveDataProvider([
             'query' => $query
         ]);
@@ -107,5 +112,35 @@ class ActivityController extends Controller
           } else {
             return "Failed: " . VarDumper::export($model->errors);
             }
+    }
+
+    public function actionToday()
+    {
+
+        $time = date('Y-m-d');
+
+
+        // запись в кэш событий на сегодня
+        $cacheKey = 'todayActivity';
+
+        if (Yii::$app->cache->exists($cacheKey)) {
+            $query = Yii::$app->cache->get($cacheKey);
+        } else {
+            $query = Activity::find()->where(['date_start' => $time]);
+            // если юзер не админ, то просматривает только свои записи
+            if (!Yii::$app->user->can('admin')) {
+                $query->andWhere(['user_id' => Yii::$app->user->id]);
+            }
+            Yii::$app->cache->set($cacheKey, $query);
+        }
+
+
+
+        $provider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('index', [
+            'provider' => $provider
+        ]);
     }
 }
