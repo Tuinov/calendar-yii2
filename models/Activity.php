@@ -3,6 +3,7 @@
 
 namespace app\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\behaviors\BlameableBehavior;
 
@@ -26,6 +27,8 @@ class Activity extends ActiveRecord
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => 'user_id',
             ],
+            TimestampBehavior::className(),
+            \CachedRecordBehavior::className()
         ];
     }
 
