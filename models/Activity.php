@@ -28,7 +28,7 @@ class Activity extends ActiveRecord
                 'updatedByAttribute' => 'user_id',
             ],
             TimestampBehavior::className(),
-            \CachedRecordBehavior::className()
+//            \CachedRecordBehavior::className()
         ];
     }
 
